@@ -1,17 +1,23 @@
-# Interactive 3D Card
+<h1 align="center">Interactive 3D Card</h1>
 
-**A pointer-tracked card that tilts in real 3D space and lights up as you move across it, with automatic dark mode.**
+<p align="center"><b>A pointer-tracked card that tilts in real 3D space and lights up as you move across it, with automatic dark mode.</b></p>
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-3dcard--hover--effect.netlify.app-2ea44f?style=flat-square&logo=vercel&logoColor=white)](https://3dcard-hover-effect.netlify.app/)
+<p align="center">
+[![Live Demo](https://img.shields.io/badge/Live_Demo-▶-2ea44f?style=for-the-badge&logo=vercel&logoColor=white)](https://3dcard-hover-effect.netlify.app/)
 ![React 19](https://img.shields.io/badge/React_19-61dafb?style=flat-square&logoColor=white)
 ![CSS 3D](https://img.shields.io/badge/CSS_3D-1572b6?style=flat-square&logoColor=white)
 ![CSS Modules](https://img.shields.io/badge/CSS_Modules-0969da?style=flat-square&logoColor=white)
+</p>
+
+<p align="center">[**Live demo**](https://3dcard-hover-effect.netlify.app/) · [Quick start](#quick-start) · [Features](#features) · [Architecture](#architecture) · [FAQ](#faq)</p>
 
 <p align="center">
   <a href="https://3dcard-hover-effect.netlify.app/">
-    <img src="docs/preview.png" alt="Interactive 3D Card — desktop preview" width="100%">
+    <img src="docs/demo.gif" alt="Interactive 3D Card — animated demo" width="88%">
   </a>
 </p>
+
+<p align="center"><sub>Live capture of the real build — 840 KB, loops forever.</sub></p>
 
 ## Overview
 
@@ -20,6 +26,15 @@ A single card that reads the pointer position over it, converts that position in
 There is no animation library here on purpose. The transform is written straight to React state and handed to CSS, which keeps the effect easy to follow and trivial to tune.
 
 The card also carries its own theme: it reads `localStorage` first and falls back to the `prefers-color-scheme` media query, then re-renders in the matching palette.
+
+## At a glance
+
+| Field | Detail |
+| --- | --- |
+| **Type** | Web application — Vite build |
+| **Primary language** | JavaScript |
+| **Live demo** | [3dcard-hover-effect.netlify.app](https://3dcard-hover-effect.netlify.app/) |
+| **Repository** | [Mister2314/Interactive-3D-Card](https://github.com/Mister2314/Interactive-3D-Card) |
 
 ## Features
 
@@ -39,13 +54,24 @@ The card also carries its own theme: it reads `localStorage` first and falls bac
 | Styling | CSS Modules |
 | Build | Vite, ESLint |
 
+## Architecture
+
+```mermaid
+flowchart LR
+  A["mousemove"] --> B["Pointer position<br/>relative to card"]
+  B --> C["Map to rotateX / rotateY"]
+  C --> D["CSS transform<br/>perspective + preserve-3d"]
+  D --> E["Card tilts"]
+  F["mouseleave"] --> G["Reset to flat"]
+```
+
 ## Screenshots
 
 | Desktop | Mobile |
 | :---: | :---: |
 | <img src="docs/preview.png" alt="Desktop view"> | <img src="docs/preview-mobile.png" alt="Mobile view" width="230"> |
 
-## Getting Started
+## Quick Start
 
 ```bash
 git clone https://github.com/Mister2314/Interactive-3D-Card.git
@@ -61,6 +87,35 @@ src/components/InteractiveCard.jsx — pointer tracking, transform maths, theme 
 src/components/InteractiveCard.module.css — 3D perspective, gloss layer and both palettes
 src/App.jsx — mounts the card
 ```
+
+## FAQ
+
+<details>
+<summary><b>Why no animation library?</b></summary>
+
+The whole effect is one transform value driven by pointer position. Adding a library would have hidden exactly the part worth understanding.
+
+</details>
+
+<details>
+<summary><b>Does the tilt work on touch devices?</b></summary>
+
+Not currently — `mousemove` does not fire on touch. Touch support would need `touchmove` plus a fallback that keeps the card flat.
+
+</details>
+
+<details>
+<summary><b>How is dark mode chosen?</b></summary>
+
+`localStorage` first, then the `prefers-color-scheme` media query, and any change is written back to `localStorage`.
+
+</details>
+
+## Roadmap
+
+- [ ] Add touch / pointer-events support
+- [ ] Expose the tilt intensity as a prop
+- [ ] Add a reduced-motion path that disables the effect
 
 ## Notes
 
