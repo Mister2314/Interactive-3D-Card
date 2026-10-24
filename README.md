@@ -1,18 +1,27 @@
-﻿# Interactive-3D-Card
+# Interactive-3D-Card
 
 A React card that tilts in 3D following the pointer and switches between dark and light themes.
 
 **Live demo:** <https://3dcard-hover-effect.netlify.app/>
 
-<p align="center">
 <div align="center">
+
+<img src="docs/demo.gif" alt="Interactive-3D-Card — animated demo" width="700">
 
 | Desktop | Mobile |
 |---|---|
 | <img src="docs/shot-desktop.png" alt="Desktop view" width="700"> | <img src="docs/shot-mobile.png" alt="Mobile view" width="290"> |
 
+<details>
+<summary>More screenshots</summary>
+
+| Desktop | Mobile |
+|---|---|
+| <img src="docs/preview.png" alt="Desktop, alternate view" width="700"> | <img src="docs/preview-mobile.png" alt="Mobile, alternate view" width="290"> |
+
+</details>
+
 </div>
-</p>
 
 ## What it does
 
